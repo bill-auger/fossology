@@ -78,6 +78,23 @@ class admin_obligation_file extends FO_Plugin
     $V = ""; // menu_to_1html(menu_find($this->Name, $MenuDepth),0);
     $errorstr = "Obligation or risk not added";
 
+    // Delete db record
+    if (@$_POST["del"])
+    {
+      $ob_pk = @$_POST["ob_pk"];
+      if (@$_POST["del"] == 'y')
+      {
+        //TODO Delete obligation and license association from DB
+        $V .= "<p>Obligation $ob_pk has been deleted.</p>";
+      }
+      else
+      {
+        $V .= "<p>Obligation $ob_pk has not been deleted.</p>";
+      }
+      $V .= $this->Inputfm();
+      return $V;
+    }
+
     // update the db
     if (@$_POST["updateit"])
     {
@@ -301,6 +318,22 @@ class admin_obligation_file extends FO_Plugin
       <script src='scripts/select2.full.min.js'></script>
       <script type='text/javascript'>
         $('#licenseSelectorId').select2({'placeholder': 'Select license associated with this obligation'});
+      </script>
+      <script type='text/javascript'>
+        function confirmDeletion(obId) {
+
+          var updateform = document.forms['Updatefm'];
+          var delinput = document.createElement('input');
+          delinput.name = 'del';
+
+          if (confirm('Are you sure?')) {
+            delinput.value = 'y';
+          }
+          else {
+            delinput.value = 'n';
+          }
+          updateform.appendChild(delinput);
+        }
       </script>";
 
     $this->renderScripts($scripts);

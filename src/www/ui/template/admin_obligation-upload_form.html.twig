@@ -42,4 +42,7 @@
     <a href="?mod=admin_obligation_to_csv&amp;ob={{ obId }}" class="buttonLink">{{ 'Export as CSV'|trans }}</a>
   {% endif %}
   <input type="submit" value="{% if obId %}{{ 'Update'|trans }}{% else %}{{ 'Add obligation'|trans }}{% endif %}"/>
+  {% if obId %}
+  <input type="submit" onclick="confirmDeletion()" value="{{ 'Delete obligation (use with caution)'|trans }}"/>
+  {% endif %}
 </form>
