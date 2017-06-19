@@ -951,8 +951,8 @@
   $Schema["TABLE"]["obligation_ref"]["ob_type"]["ALTER"] = "ALTER TABLE \"obligation_ref\" ALTER COLUMN \"ob_type\" SET NOT NULL";
 
   $Schema["TABLE"]["obligation_ref"]["ob_modifications"]["DESC"] = "COMMENT ON COLUMN \"obligation_ref\".\"ob_modifications\" IS 'True if the obligation applies on modifications'";
-  $Schema["TABLE"]["obligation_ref"]["ob_modifications"]["ADD"] = "ALTER TABLE \"obligation_ref\" ADD COLUMN \"ob_modifications\" bool DEFAULT false";
-  $Schema["TABLE"]["obligation_ref"]["ob_modifications"]["ALTER"] = "ALTER TABLE \"obligation_ref\" ALTER COLUMN \"ob_modifications\" SET DEFAULT false";
+  $Schema["TABLE"]["obligation_ref"]["ob_modifications"]["ADD"] = "ALTER TABLE \"obligation_ref\" ADD COLUMN \"ob_modifications\" text";
+  $Schema["TABLE"]["obligation_ref"]["ob_modifications"]["ALTER"] = "ALTER TABLE \"obligation_ref\" ALTER COLUMN \"ob_modifications\" SET NOT NULL";
 
   $Schema["TABLE"]["obligation_ref"]["ob_topic"]["DESC"] = "COMMENT ON COLUMN \"obligation_ref\".\"ob_topic\" IS 'Include notices, Copyleft effect, ...'";
   $Schema["TABLE"]["obligation_ref"]["ob_topic"]["ADD"] = "ALTER TABLE \"obligation_ref\" ADD COLUMN \"ob_topic\" text";

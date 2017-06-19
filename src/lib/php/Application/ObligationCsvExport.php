@@ -52,7 +52,7 @@ class ObligationCsvExport {
   public function createCsv($ob=0)
   {
     $csvarray = array();
-    $sql = "SELECT ob_pk, ob_topic,ob_text
+    $sql = "SELECT ob_pk,ob_type,ob_topic,ob_text,ob_format,ob_modifications,ob_comment
             FROM obligation_ref;";
     if ($ob>0)
     {
@@ -84,7 +84,7 @@ class ObligationCsvExport {
 
     $out = fopen('php://output', 'w');
     ob_start();
-    $head = array('Obligation or Risk topic','Full Text','Associated Licenses');
+    $head = array('Type','Obligation or Risk topic','Full Text','Format','Applies on modifications','Comment','Associated Licenses');
     fputcsv($out, $head, $this->delimiter, $this->enclosure);
     foreach($csvarray as $row)
     {

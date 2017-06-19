@@ -251,14 +251,7 @@ class admin_obligation_file extends FO_Plugin
       $ob .= "<td><textarea readonly=readonly rows=3 cols=40>$vetext</textarea></td> ";
       $ob .= "<td align=left>$row[ob_format]</td>";
       $ob .= "<td align=center>$associatedLicenses</td>";
-      if ($row['ob_modifications'] == "t")
-      {
-        $ob .= "<td align=center>True</td>";
-      }
-      else
-      {
-        $ob .= "<td align=center>False</td>";
-      }
+      $ob .= "<td align=center>$row[ob_modifications]</td>";
       $vetext = htmlspecialchars($row['ob_comment']);
       $ob .= "<td><textarea readonly=readonly rows=3 cols=40>$vetext</textarea></td> ";
       $ob .= "</tr>";
@@ -302,7 +295,7 @@ class admin_obligation_file extends FO_Plugin
     }
     else
     {
-      $row = array('ob_active' =>'t', 'ob_modifications' =>'f', 'ob_text_updatable'=>'t');
+      $row = array('ob_active' =>'t', 'ob_modifications' =>'No', 'ob_text_updatable'=>'t');
     }
 
     foreach(array_keys($row) as $key)
@@ -314,8 +307,8 @@ class admin_obligation_file extends FO_Plugin
     }
 
     $vars['boolYesNoMap'] = array("true"=>"Yes", "false"=>"No");
+    $vars['YesNoMap'] = array("Yes"=>"Yes", "No"=>"No");
     $row['ob_active'] = $this->dbManager->booleanFromDb($row['ob_active'])?'true':'false';
-    $row['ob_modifications'] = $this->dbManager->booleanFromDb($row['ob_modifications'])?'true':'false';
     $row['ob_text_updatable'] = $this->dbManager->booleanFromDb($row['ob_text_updatable'])?'true':'false';
     $vars['isReadOnly'] = !(empty($ob_pk) || $row['ob_text_updatable']=='true');
 
