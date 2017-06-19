@@ -21,6 +21,14 @@
       <td><input type="text" name="ob_topic" value="{{ ob_topic|e }}" size="30"></td>
     </tr>
     <tr>
+      <td align="right">{{ 'Type of obligation'|trans }}
+        {% if isReadOnly %}
+          ({{ 'read only'|trans }}){% endif %}
+      </td>
+      <td align="left">{{ macro.select('ob_type', obligationTypes, 'ob_type', ob_type, 'style="min-width:420px;"', 3) }}
+      </td>
+    </tr>
+    <tr>
       <td align="right">{{ 'Obligation Text'|trans }}
         {% if isReadOnly %}
           ({{ 'read only'|trans }}){% endif %}
@@ -30,8 +38,26 @@
       </td>
     </tr>
     <tr>
+      <td align="right">{{ 'Format (color in the final report)'|trans }}
+        {% if isReadOnly %}
+          ({{ 'read only'|trans }}){% endif %}
+      </td>
+      <td align="left">{{ macro.select('ob_format', obligationFormats, 'ob_format', ob_format, 'style="min-width:420px;"', 3) }}
+      </td>
+    </tr>
+    <tr>
+      <td align="right">{{ 'Applies on modifications'|trans }}</td>
+      <td align="left">{{ macro.select('ob_modifications',boolYesNoMap,'ob_modifications',ob_modifications) }}</td>
+    </tr>
+    <tr>
       <td align="right">{{ "Associated Licenses"|trans }}</td>
       <td align="left">{{ macro.selectwitharray(licenseSelectorName, licenseShortnames, licenseSelectorId, licnames, 'style="min-width:420px;"', 5) }}</td>
+    </tr>
+    <tr>
+      <td align="right">{{ 'Comment'|trans }}</td>
+      <td>
+        <textarea name="ob_comment" rows="5" cols="80" {% if isReadOnly %} readonly="readonly" {% endif %}>{{ ob_comment  |e }}</textarea>
+      </td>
     </tr>
     <tr>
       <td align="right">{{ 'Text Updatable'|trans }}</td>

@@ -98,12 +98,22 @@ class ObligationMap extends Object
   }
 
   /** @brief check if the text of this obligation is existing */
-  public function unassociateLicenseFromObligation($obId,$licId)
+  public function unassociateLicenseFromObligation($obId,$licId=0)
   {
-    $sql = "DELETE FROM obligation_map WHERE ob_fk=$1 AND rf_fk=$2";
-    $stmt = __METHOD__.".omdel_$licId";
-    $this->dbManager->prepare($stmt,$sql);
-    $res = $this->dbManager->execute($stmt,array($obId,$licId));
+    if ($licId == 0)
+    {
+      $sql = "DELETE FROM obligation_map WHERE ob_fk=$1";
+      $stmt = __METHOD__.".omdel_all";
+      $this->dbManager->prepare($stmt,$sql);
+      $res = $this->dbManager->execute($stmt,array($obId));
+    }
+    else
+    {
+      $sql = "DELETE FROM obligation_map WHERE ob_fk=$1 AND rf_fk=$2";
+      $stmt = __METHOD__.".omdel_$licId";
+      $this->dbManager->prepare($stmt,$sql);
+      $res = $this->dbManager->execute($stmt,array($obId,$licId));
+    }
     $this->dbManager->fetchArray($res);
     $this->dbManager->freeResult($res);
   }
